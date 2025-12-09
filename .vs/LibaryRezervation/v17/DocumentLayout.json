@@ -1,0 +1,106 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\uyslz\\OneDrive\\Masa\u00FCst\u00FC\\vs\\LibaryRezervation\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{28C8629F-9E3A-4315-9D3D-BF69A303C8D3}|LibaryRezervation\\LibaryRezervation.csproj|c:\\users\\uyslz\\onedrive\\masa\u00FCst\u00FC\\vs\\libaryrezervation\\libaryrezervation\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28C8629F-9E3A-4315-9D3D-BF69A303C8D3}|LibaryRezervation\\LibaryRezervation.csproj|solutionrelative:libaryrezervation\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28C8629F-9E3A-4315-9D3D-BF69A303C8D3}|LibaryRezervation\\LibaryRezervation.csproj|c:\\users\\uyslz\\onedrive\\masa\u00FCst\u00FC\\vs\\libaryrezervation\\libaryrezervation\\areas\\admin\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28C8629F-9E3A-4315-9D3D-BF69A303C8D3}|LibaryRezervation\\LibaryRezervation.csproj|solutionrelative:libaryrezervation\\areas\\admin\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28C8629F-9E3A-4315-9D3D-BF69A303C8D3}|LibaryRezervation\\LibaryRezervation.csproj|c:\\users\\uyslz\\onedrive\\masa\u00FCst\u00FC\\vs\\libaryrezervation\\libaryrezervation\\libaryrezervation.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{28C8629F-9E3A-4315-9D3D-BF69A303C8D3}|LibaryRezervation\\LibaryRezervation.csproj|solutionrelative:libaryrezervation\\libaryrezervation.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28C8629F-9E3A-4315-9D3D-BF69A303C8D3}|LibaryRezervation\\LibaryRezervation.csproj|c:\\users\\uyslz\\onedrive\\masa\u00FCst\u00FC\\vs\\libaryrezervation\\libaryrezervation\\controllers\\complaintcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28C8629F-9E3A-4315-9D3D-BF69A303C8D3}|LibaryRezervation\\LibaryRezervation.csproj|solutionrelative:libaryrezervation\\controllers\\complaintcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28C8629F-9E3A-4315-9D3D-BF69A303C8D3}|LibaryRezervation\\LibaryRezervation.csproj|c:\\users\\uyslz\\onedrive\\masa\u00FCst\u00FC\\vs\\libaryrezervation\\libaryrezervation\\controllers\\reservationcontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28C8629F-9E3A-4315-9D3D-BF69A303C8D3}|LibaryRezervation\\LibaryRezervation.csproj|solutionrelative:libaryrezervation\\controllers\\reservationcontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\uyslz\\OneDrive\\Masa\u00FCst\u00FC\\vs\\LibaryRezervation\\LibaryRezervation\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "LibaryRezervation\\Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Users\\uyslz\\OneDrive\\Masa\u00FCst\u00FC\\vs\\LibaryRezervation\\LibaryRezervation\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "LibaryRezervation\\Controllers\\LoginController.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T17:19:00.436Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LibaryRezervation.csproj",
+              "DocumentMoniker": "C:\\Users\\uyslz\\OneDrive\\Masa\u00FCst\u00FC\\vs\\LibaryRezervation\\LibaryRezervation\\LibaryRezervation.csproj",
+              "RelativeDocumentMoniker": "LibaryRezervation\\LibaryRezervation.csproj",
+              "ToolTip": "C:\\Users\\uyslz\\OneDrive\\Masa\u00FCst\u00FC\\vs\\LibaryRezervation\\LibaryRezervation\\LibaryRezervation.csproj",
+              "RelativeToolTip": "LibaryRezervation\\LibaryRezervation.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-04T16:54:01.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ReservationController.cs",
+              "DocumentMoniker": "C:\\Users\\uyslz\\OneDrive\\Masa\u00FCst\u00FC\\vs\\LibaryRezervation\\LibaryRezervation\\Areas\\Admin\\Controllers\\ReservationController.cs",
+              "RelativeDocumentMoniker": "LibaryRezervation\\Areas\\Admin\\Controllers\\ReservationController.cs",
+              "ToolTip": "C:\\Users\\uyslz\\OneDrive\\Masa\u00FCst\u00FC\\vs\\LibaryRezervation\\LibaryRezervation\\Areas\\Admin\\Controllers\\ReservationController.cs",
+              "RelativeToolTip": "LibaryRezervation\\Areas\\Admin\\Controllers\\ReservationController.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAMwF8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-10T10:48:58.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ComplaintController.cs",
+              "DocumentMoniker": "C:\\Users\\uyslz\\OneDrive\\Masa\u00FCst\u00FC\\vs\\LibaryRezervation\\LibaryRezervation\\Controllers\\ComplaintController.cs",
+              "RelativeDocumentMoniker": "LibaryRezervation\\Controllers\\ComplaintController.cs",
+              "ToolTip": "C:\\Users\\uyslz\\OneDrive\\Masa\u00FCst\u00FC\\vs\\LibaryRezervation\\LibaryRezervation\\Controllers\\ComplaintController.cs",
+              "RelativeToolTip": "LibaryRezervation\\Controllers\\ComplaintController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-10T10:44:11.908Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ReservationController .cs",
+              "DocumentMoniker": "C:\\Users\\uyslz\\OneDrive\\Masa\u00FCst\u00FC\\vs\\LibaryRezervation\\LibaryRezervation\\Controllers\\ReservationController .cs",
+              "RelativeDocumentMoniker": "LibaryRezervation\\Controllers\\ReservationController .cs",
+              "ToolTip": "C:\\Users\\uyslz\\OneDrive\\Masa\u00FCst\u00FC\\vs\\LibaryRezervation\\LibaryRezervation\\Controllers\\ReservationController .cs",
+              "RelativeToolTip": "LibaryRezervation\\Controllers\\ReservationController .cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAYwEkAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-10T10:35:58.429Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "studentNumber": "20201234",
+    "message": "K\u00FCt\u00FCphanedeki sessiz alanlar \u00E7ok g\u00FCzel, rezervasyon sistemi h\u0131zl\u0131 \u00E7al\u0131\u015F\u0131yor.",
+    "date": "2025-12-04T22:51:03.1670514+03:00"
+  },
+  {
+    "id": 2,
+    "studentNumber": "20205678",
+    "message": "Ak\u015Fam saatlerinde daha fazla masa a\u00E7\u0131lmas\u0131n\u0131 isterim.",
+    "date": "2025-12-05T22:51:03.1672941+03:00"
+  },
+  {
+    "id": 3,
+    "studentNumber": "20207890",
+    "message": "Rezervasyon iptal i\u015Flemi \u00E7ok pratik olmu\u015F, te\u015Fekk\u00FCrler.",
+    "date": "2025-12-06T16:51:03.1672956+03:00"
+  },
+  {
+    "id": 4,
+    "studentNumber": "12345",
+    "message": "aaaa",
+    "date": "2025-12-06T23:16:12.7779405+03:00"
+  },
+  {
+    "id": 5,
+    "studentNumber": "777",
+    "message": "dd",
+    "date": "2025-12-09T16:18:31.4423338+03:00"
+  },
+  {
+    "id": 6,
+    "studentNumber": "777",
+    "message": "ww",
+    "date": "2025-12-09T16:45:42.7842847+03:00"
+  }
+]

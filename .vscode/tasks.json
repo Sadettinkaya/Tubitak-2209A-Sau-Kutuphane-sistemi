@@ -1,0 +1,81 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build (Gateway)",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "${workspaceFolder}/Backend/ApiGateway/ApiGateway.csproj"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "run (Gateway)",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "run",
+                "--project",
+                "${workspaceFolder}/Backend/ApiGateway/ApiGateway.csproj",
+                "--urls",
+                "http://localhost:5000"
+            ],
+            "isBackground": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run (Identity)",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "run",
+                "--project",
+                "${workspaceFolder}/Backend/IdentityService/IdentityService.csproj",
+                "--urls",
+                "http://localhost:5001"
+            ],
+            "isBackground": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run (Reservation)",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "run",
+                "--project",
+                "${workspaceFolder}/Backend/ReservationService/ReservationService.csproj",
+                "--urls",
+                "http://localhost:5002"
+            ],
+            "isBackground": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run (Turnstile)",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "run",
+                "--project",
+                "${workspaceFolder}/Backend/TurnstileService/TurnstileService.csproj",
+                "--urls",
+                "http://localhost:5003"
+            ],
+            "isBackground": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "start (frontend)",
+            "type": "shell",
+            "command": "npm start",
+            "options": {
+                "cwd": "${workspaceFolder}/Frontend"
+            },
+            "isBackground": true,
+            "problemMatcher": "$tsc"
+        }
+    ]
+}

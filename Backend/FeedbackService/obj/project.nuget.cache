@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "jnScghoRZspT5yeCrEckN4iNj2VYQ/rKwU0lFBTnSN1pMQSGoJCr83lzvLPIsksJm6te7ALJCT8+qFf5W1lKOw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Victus\\OneDrive\\Masaüstü\\LibaryRezervation\\Backend\\FeedbackService\\FeedbackService.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Victus\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\Victus\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Victus\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\Victus\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\Victus\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\Victus\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
