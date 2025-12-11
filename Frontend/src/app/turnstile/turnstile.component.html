@@ -1,0 +1,28 @@
+<section id="turnstile" class="turnstile section">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Turnike Girişi</h2>
+      <p>Kütüphaneye giriş yapmak için öğrenci numaranızı okutunuz (giriniz).</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+            <div class="mb-3">
+              <label for="studentNumber" class="form-label">Öğrenci Numarası</label>
+              <input type="text" class="form-control form-control-lg text-center" id="studentNumber" [(ngModel)]="studentNumber" (keyup.enter)="onEnter()" placeholder="Örn: 12345">
+            </div>
+            <button class="btn btn-primary btn-lg w-100" (click)="onEnter()" [disabled]="isLoading">
+              {{ isLoading ? 'İşleniyor...' : 'Giriş Yap' }}
+            </button>
+
+            <div *ngIf="message" class="mt-4 alert" [ngClass]="{'alert-success': isSuccess, 'alert-danger': !isSuccess}">
+              {{ message }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

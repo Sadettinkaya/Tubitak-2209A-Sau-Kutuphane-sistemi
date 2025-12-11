@@ -1,0 +1,48 @@
+<section id="signup" class="signup section">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Kayıt Ol</h2>
+      <p>Kütüphane rezervasyon sistemine kayıt olun.</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <form (ngSubmit)="onSignup()">
+              <div class="mb-3">
+                <label for="studentNumber" class="form-label">Öğrenci Numarası</label>
+                <input type="text" class="form-control" id="studentNumber" [(ngModel)]="user.studentNumber" name="studentNumber" required placeholder="Örn: g221210006">
+              </div>
+              <div class="mb-3">
+                <label for="fullName" class="form-label">Ad Soyad</label>
+                <input type="text" class="form-control" id="fullName" [(ngModel)]="user.fullName" name="fullName" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">E-posta</label>
+                <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="academicLevel" class="form-label">Akademik Seviye</label>
+                <select class="form-select" id="academicLevel" [(ngModel)]="user.academicLevel" name="academicLevel">
+                  <option value="Lisans">Lisans</option>
+                  <option value="Yüksek Lisans">Yüksek Lisans</option>
+                  <option value="Doktora">Doktora</option>
+                  <option value="Akademisyen">Akademisyen</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Şifre</label>
+                <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Kayıt Ol</button>
+              <div class="mt-3 text-center">
+                <p>Zaten hesabınız var mı? <a routerLink="/login">Giriş Yap</a></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

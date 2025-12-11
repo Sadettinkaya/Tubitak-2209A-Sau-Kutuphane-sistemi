@@ -1,0 +1,16 @@
+import { Component } from '@angular/core';
+import { AuthService } from '../auth.service';
+
+@Component({
+  selector: 'app-reservation',
+  templateUrl: './reservation.component.html',
+  styleUrls: ['./reservation.component.css']
+})
+export class ReservationComponent {
+
+  constructor(public authService: AuthService) { }
+
+  createReservation() {
+    // Rezervasyon oluşturma işlemleri
+  }
+}

@@ -1,0 +1,80 @@
+<div class="admin-panel-container">
+  <h2>Yönetici Paneli</h2>
+  <div class="admin-section">
+    <h4>Tüm Rezervasyonlar</h4>
+    <div *ngIf="isLoadingReservations" class="admin-info">Rezervasyonlar yükleniyor...</div>
+    <div *ngIf="!isLoadingReservations && reservations.length === 0" class="admin-info">Kayıtlı rezervasyon bulunamadı.</div>
+    <table *ngIf="!isLoadingReservations && reservations.length > 0" class="admin-table">
+      <thead>
+        <tr>
+          <th>Öğrenci No</th>
+          <th>Tarih</th>
+          <th>Saat</th>
+          <th>Masa</th>
+          <th>Durum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let res of reservations">
+          <td>{{ res.studentNumber || res.StudentNumber }}</td>
+          <td>{{ res.reservationDate || res.ReservationDate }}</td>
+          <td>{{ res.startTime || res.StartTime }} - {{ res.endTime || res.EndTime }}</td>
+          <td>{{ res.tableNumber || res.TableNumber }} (Kat: {{ res.floorId || res.FloorId }})</td>
+          <td>
+            <span *ngIf="res.isAttended || res.IsAttended" class="badge bg-success">Giriş Yapıldı</span>
+            <span *ngIf="!(res.isAttended || res.IsAttended)" class="badge bg-warning text-dark">Bekliyor</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="admin-section">
+    <h4>Gelen Geri Bildirimler</h4>
+    <div *ngIf="isLoadingFeedbacks" class="admin-info">Geri bildirimler yükleniyor...</div>
+    <div *ngIf="!isLoadingFeedbacks && feedbacks.length === 0" class="admin-info">Geri bildirim bulunamadı.</div>
+    <table *ngIf="!isLoadingFeedbacks && feedbacks.length > 0" class="admin-table">
+      <thead>
+        <tr>
+          <th>Tarih</th>
+          <th>Öğrenci No</th>
+          <th>Mesaj</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fb of feedbacks">
+          <td>{{ (fb.date || fb.Date) | date:'short' }}</td>
+          <td>{{ fb.studentNumber || fb.StudentNumber }}</td>
+          <td>{{ fb.message || fb.Message }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="admin-section">
+    <h4>Kullanıcı Cezaları</h4>
+    <div *ngIf="isLoadingPenalties" class="admin-info">Ceza kayıtları yükleniyor...</div>
+    <div *ngIf="!isLoadingPenalties && penaltiesError" class="admin-info text-danger">{{ penaltiesError }}</div>
+    <div *ngIf="!isLoadingPenalties && !penaltiesError && penalties.length === 0" class="admin-info">Ceza kaydı bulunmuyor.</div>
+    <table *ngIf="!isLoadingPenalties && penalties.length > 0" class="admin-table">
+      <thead>
+        <tr>
+          <th>Öğrenci No</th>
+          <th>Öğrenci Tipi</th>
+          <th>Ceza Puanı</th>
+          <th>Ban Bitiş Tarihi</th>
+          <th>Ceza Nedeni</th>
+          <th>Son No-Show İşleme</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let penalty of penalties">
+          <td>{{ penalty.studentNumber || penalty.StudentNumber }}</td>
+          <td>{{ penalty.studentType || penalty.StudentType }}</td>
+          <td>{{ penalty.penaltyPoints || penalty.PenaltyPoints }}</td>
+          <td>{{ (penalty.banUntil || penalty.BanUntil) || '-' }}</td>
+          <td>{{ (penalty.banReason || penalty.BanReason) || '-' }}</td>
+          <td>{{ (penalty.lastNoShowProcessedAt || penalty.LastNoShowProcessedAt) | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
