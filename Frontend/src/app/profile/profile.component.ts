@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReservationService } from '../services/reservation.service';
 import { AuthService } from '../services/auth.service';
@@ -114,6 +114,7 @@ export class ProfileComponent implements OnInit {
     private authService: AuthService,
     private feedbackService: FeedbackService,
     private router: Router,
+    private cdr: ChangeDetectorRef,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
@@ -135,6 +136,7 @@ export class ProfileComponent implements OnInit {
   loadReservations() {
     if (this.studentNumber) {
       this.isLoadingReservations = true;
+      this.cdr.detectChanges();
       this.reservationService.getMyReservations(this.studentNumber).subscribe({
         next: (data) => {
           console.log('Reservations received:', data);
@@ -145,11 +147,13 @@ export class ProfileComponent implements OnInit {
              this.reservations = [];
           }
           this.isLoadingReservations = false;
+          this.cdr.detectChanges();
         },
         error: (err) => {
           console.error('Error loading reservations:', err);
           this.reservations = [];
           this.isLoadingReservations = false;
+          this.cdr.detectChanges();
         }
       });
     }
@@ -162,16 +166,19 @@ export class ProfileComponent implements OnInit {
 
     this.isLoadingProfile = true;
     this.profileError = '';
+    this.cdr.detectChanges();
 
     this.reservationService.getStudentProfile(this.studentNumber).subscribe({
       next: (data) => {
         this.penaltyInfo = data;
         this.isLoadingProfile = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.profileError = 'Ceza bilgileri alınamadı.';
         this.penaltyInfo = null;
         this.isLoadingProfile = false;
+        this.cdr.detectChanges();
       }
     });
   }

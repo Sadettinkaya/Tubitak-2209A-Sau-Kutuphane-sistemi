@@ -5,7 +5,19 @@ using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+// Docker ortamında ocelot.docker.json, yerel ortamda ocelot.json kullan
+var environment = builder.Environment.EnvironmentName;
+var ocelotConfigFile = environment == "Docker" ? "ocelot.docker.json" : "ocelot.json";
+
+// ASPNETCORE_ENVIRONMENT=Development ama Docker'da çalışıyorsak container hostname'lerini kullan
+var isDocker = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true" ||
+               File.Exists("/.dockerenv");
+if (isDocker)
+{
+    ocelotConfigFile = "ocelot.docker.json";
+}
+
+builder.Configuration.AddJsonFile(ocelotConfigFile, optional: false, reloadOnChange: true);
 builder.Services.AddOcelot(builder.Configuration);
 builder.Services.AddCors(options =>
 {

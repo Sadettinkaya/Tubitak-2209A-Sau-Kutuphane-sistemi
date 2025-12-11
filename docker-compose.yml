@@ -1,0 +1,136 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: library_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "78"
+      POSTGRES_DB: LibraryReservation
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - library_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Identity Service (Port 5001)
+  identity-service:
+    build:
+      context: ./Backend/IdentityService
+      dockerfile: Dockerfile
+    container_name: identity_service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5001
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=LibraryReservation;Username=postgres;Password=78
+      - TZ=Europe/Istanbul
+    ports:
+      - "5001:5001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - library_network
+
+  # Reservation Service (Port 5002)
+  reservation-service:
+    build:
+      context: ./Backend/ReservationService
+      dockerfile: Dockerfile
+    container_name: reservation_service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5002
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=LibraryReservation;Username=postgres;Password=78
+      - TZ=Europe/Istanbul
+    ports:
+      - "5002:5002"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - library_network
+
+  # Turnstile Service (Port 5003)
+  turnstile-service:
+    build:
+      context: ./Backend/TurnstileService
+      dockerfile: Dockerfile
+    container_name: turnstile_service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5003
+      - Turnstile__ReservationServiceBaseUrl=http://api-gateway:5010/
+      - Turnstile__IdentityBaseUrl=http://identity-service:5001/api/Auth
+      - TZ=Europe/Istanbul
+    ports:
+      - "5003:5003"
+    depends_on:
+      - reservation-service
+      - identity-service
+    networks:
+      - library_network
+
+  # Feedback Service (Port 5004)
+  feedback-service:
+    build:
+      context: ./Backend/FeedbackService
+      dockerfile: Dockerfile
+    container_name: feedback_service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5004
+    ports:
+      - "5004:5004"
+    volumes:
+      - feedback_data:/app/App_Data
+    networks:
+      - library_network
+
+  # API Gateway (Port 5010)
+  api-gateway:
+    build:
+      context: ./Backend/ApiGateway
+      dockerfile: Dockerfile
+    container_name: api_gateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5010
+    ports:
+      - "5010:5010"
+    depends_on:
+      - identity-service
+      - reservation-service
+      - turnstile-service
+      - feedback-service
+    networks:
+      - library_network
+
+  # Frontend (Port 4200)
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: library_frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api-gateway
+    networks:
+      - library_network
+
+volumes:
+  postgres_data:
+  feedback_data:
+
+networks:
+  library_network:
+    driver: bridge

@@ -1,11 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "BYf3kbZqk/ZJyHumi9Bf3AjAMTTKHq4IEnFPla+BtKw=",
-  "Source": "TurnstileService",
-  "BasePath": "_content/TurnstileService",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
-}
+{"Version":1,"Hash":"4aHteHNLi6+lZl73mhi+cvH4QQ1TOOozIbzVhaSL3rc=","Source":"TurnstileService","BasePath":"_content/TurnstileService","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}

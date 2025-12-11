@@ -16,8 +16,8 @@ namespace ReservationService.Controllers
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<ReservationController> _logger;
 
-        private const int EarlyToleranceMinutes = 60;
-        private const int LateToleranceMinutes = 15;
+        private const int EarlyToleranceMinutes = 5;  // Başlangıçtan 5dk önce giriş yapılabilir
+        private const int EntryGracePeriodMinutes = 15; // Başlangıçtan 15dk sonrasına kadar giriş yapılabilir, sonra ceza
         private const int PenaltyThreshold = 3;
         private const int BanDurationDays = 7;
         private static readonly TimeSpan MinReservationDuration = TimeSpan.FromHours(1);
@@ -30,7 +30,9 @@ namespace ReservationService.Controllers
             ["lisans"] = new StudentTypeRule(Priority: 1, MaxAdvanceDays: 3, MaxActiveReservations: 1),
             ["yukseklisans"] = new StudentTypeRule(Priority: 2, MaxAdvanceDays: 5, MaxActiveReservations: 2),
             ["yükseklisans"] = new StudentTypeRule(Priority: 2, MaxAdvanceDays: 5, MaxActiveReservations: 2),
-            ["doktora"] = new StudentTypeRule(Priority: 3, MaxAdvanceDays: 7, MaxActiveReservations: 3)
+            ["doktora"] = new StudentTypeRule(Priority: 3, MaxAdvanceDays: 7, MaxActiveReservations: 3),
+            // Admin için kısıtları esnetiyoruz
+            ["admin"] = new StudentTypeRule(Priority: 99, MaxAdvanceDays: 30, MaxActiveReservations: 10)
         };
 
         private static readonly Dictionary<string, string> StudentTypeCanonicalNames = new(StudentTypeComparer)
@@ -38,7 +40,8 @@ namespace ReservationService.Controllers
             ["lisans"] = "Lisans",
             ["yukseklisans"] = "YüksekLisans",
             ["yükseklisans"] = "YüksekLisans",
-            ["doktora"] = "Doktora"
+            ["doktora"] = "Doktora",
+            ["admin"] = "Admin"
         };
 
         public ReservationController(ReservationDbContext context, IHttpClientFactory httpClientFactory, ILogger<ReservationController> logger)
@@ -494,8 +497,9 @@ namespace ReservationService.Controllers
 
             foreach (var reservation in overdueReservations)
             {
-                var reservationEnd = reservation.ReservationDate.ToDateTime(reservation.EndTime);
-                if (reservationEnd.AddMinutes(LateToleranceMinutes) < nowLocal)
+                // Başlangıç saatinden 15dk sonrasına kadar giriş yapılmalı, aksi halde ceza
+                var reservationStart = reservation.ReservationDate.ToDateTime(reservation.StartTime);
+                if (reservationStart.AddMinutes(EntryGracePeriodMinutes) < nowLocal)
                 {
                     profile.PenaltyPoints++;
                     reservation.PenaltyProcessed = true;
@@ -613,13 +617,25 @@ namespace ReservationService.Controllers
                 .OrderBy(r => r.StartTime)
                 .ToListAsync();
 
+            // Giriş yapılabilir aralık: Başlangıç - 5dk ile Başlangıç + 15dk (veya EndTime) arasında
             var activeReservation = todaysReservations
                 .FirstOrDefault(r =>
                     r.StartTime.AddMinutes(-EarlyToleranceMinutes) <= nowTime &&
-                    r.EndTime.AddMinutes(LateToleranceMinutes) >= nowTime);
+                    r.EndTime >= nowTime);
 
             if (activeReservation != null)
             {
+                // Başlangıç + 15dk geçtiyse artık giriş yapılamaz (ceza alır)
+                var entryDeadline = activeReservation.StartTime.AddMinutes(EntryGracePeriodMinutes);
+                if (nowTime > entryDeadline && !activeReservation.IsAttended)
+                {
+                    return Ok(new
+                    {
+                        allowed = false,
+                        message = $"Giriş süresi doldu! Rezervasyon başlangıcından itibaren {EntryGracePeriodMinutes} dakika içinde giriş yapılmalıydı. Ceza puanı uygulanacak."
+                    });
+                }
+
                 if (!activeReservation.IsAttended)
                 {
                     activeReservation.IsAttended = true;

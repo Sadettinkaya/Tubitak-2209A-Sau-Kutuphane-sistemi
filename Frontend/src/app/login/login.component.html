@@ -18,7 +18,9 @@
                 <label for="password" class="form-label">Şifre</label>
                 <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
               </div>
-              <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
+              <button type="submit" class="btn btn-primary w-100" [disabled]="isLoading">
+                {{ isLoading ? 'Giriş yapılıyor...' : 'Giriş Yap' }}
+              </button>
               <div class="mt-3 text-center">
                 <p>Hesabınız yok mu? <a routerLink="/signup">Kayıt Ol</a></p>
               </div>

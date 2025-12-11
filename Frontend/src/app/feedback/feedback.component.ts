@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FeedbackService } from '../services/feedback.service';
@@ -21,7 +21,9 @@ import { Router } from '@angular/router';
               <label for="message" class="form-label">Mesajınız</label>
               <textarea class="form-control" id="message" rows="4" [(ngModel)]="message" name="message" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Gönder</button>
+            <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'Gönderiliyor...' : 'Gönder' }}
+            </button>
           </form>
         </div>
       </div>
@@ -30,11 +32,13 @@ import { Router } from '@angular/router';
 })
 export class FeedbackComponent {
   message: string = '';
+  isSubmitting: boolean = false;
 
   constructor(
     private feedbackService: FeedbackService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   onSubmit() {
@@ -53,14 +57,21 @@ export class FeedbackComponent {
       message: this.message
     };
 
+    this.isSubmitting = true;
+    this.cdr.detectChanges();
+
     this.feedbackService.submitFeedback(feedback).subscribe({
       next: () => {
         alert('Geri bildiriminiz için teşekkürler!');
         this.message = '';
+        this.isSubmitting = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error(err);
         alert('Bir hata oluştu.');
+        this.isSubmitting = false;
+        this.cdr.detectChanges();
       }
     });
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ReservationService } from '../services/reservation.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -39,7 +39,8 @@ export class ReservationFilterComponent {
   constructor(
     private reservationService: ReservationService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -54,16 +55,19 @@ export class ReservationFilterComponent {
     this.lastErrorReason = '';
     this.lastSuccessMessage = '';
     this.lastNotificationType = '';
+    this.cdr.detectChanges();
 
     this.reservationService
       .getTables(this.filter.date, this.filter.startTime, this.filter.endTime, this.filter.floorId)
       .subscribe({
         next: (data) => {
           this.tables = data;
+          this.cdr.detectChanges();
         },
         error: (err) => {
           console.error('API hatası:', err);
           alert('Masalar getirilirken hata oluştu.');
+          this.cdr.detectChanges();
         }
       });
   }
@@ -87,15 +91,14 @@ export class ReservationFilterComponent {
     }
 
     this.selectedTable = table;
-    // Use setTimeout to ensure change detection picks up the change
-    setTimeout(() => {
-      this.showConfirmationModal = true;
-    });
+    this.showConfirmationModal = true;
+    this.cdr.detectChanges();
   }
 
   cancelReservation() {
     this.showConfirmationModal = false;
     this.selectedTable = null;
+    this.cdr.detectChanges();
   }
 
   confirmReservation() {
@@ -110,6 +113,8 @@ export class ReservationFilterComponent {
 
     this.showConfirmationModal = false;
     this.isSubmitting = true;
+    this.cdr.detectChanges();
+
     const table = this.selectedTable;
     const selectedTableId = table.id ?? table.Id;
     const reservation = {
@@ -128,6 +133,7 @@ export class ReservationFilterComponent {
           this.isSubmitting = false;
           this.showConfirmationModal = false;
           this.selectedTable = null;
+          this.cdr.detectChanges();
         })
       )
       .subscribe({
@@ -137,6 +143,7 @@ export class ReservationFilterComponent {
           this.lastErrorMessage = '';
           this.lastErrorReason = '';
           this.lastNotificationType = 'success';
+          this.cdr.detectChanges();
 
           this.tables = this.tables.map(t => {
             if ((t.id ?? t.Id) === selectedTableId) {
@@ -150,6 +157,7 @@ export class ReservationFilterComponent {
             .subscribe({
               next: refreshed => {
                 this.tables = refreshed;
+                this.cdr.detectChanges();
               },
               error: () => {
                 // yenileme başarısız olursa mevcut liste kalır
@@ -179,6 +187,7 @@ export class ReservationFilterComponent {
           this.lastErrorReason = reason;
           this.lastSuccessMessage = '';
           this.lastNotificationType = 'warning';
+          this.cdr.detectChanges();
         }
       });
   }

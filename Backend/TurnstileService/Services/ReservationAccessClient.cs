@@ -44,14 +44,14 @@ public class ReservationAccessClient
             for (var attempt = 0; attempt < 2; attempt++)
             {
                 var accessToken = await _authProvider.GetAccessTokenAsync(cancellationToken);
-                if (string.IsNullOrWhiteSpace(accessToken))
-                {
-                    _logger.LogError("Turnstile service account token could not be acquired.");
-                    return null;
-                }
 
                 using var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+                // JWT'i zorunlu kılmayalım; token alınamazsa headers eklenmeden istek atılsın.
+                if (!string.IsNullOrWhiteSpace(accessToken))
+                {
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                }
 
                 using var response = await _httpClient.SendAsync(request, cancellationToken);
 
@@ -66,7 +66,11 @@ public class ReservationAccessClient
                 {
                     _logger.LogWarning("Reservation service returned {StatusCode} for student {StudentNumber}",
                         response.StatusCode, sanitizedNumber);
-                    return null;
+                    return new ReservationAccessResponse
+                    {
+                        Allowed = false,
+                        Message = "Rezervasyon servisi erişilemedi."
+                    };
                 }
 
                 return await response.Content.ReadFromJsonAsync<ReservationAccessResponse>(cancellationToken: cancellationToken);

@@ -1,6 +1,4 @@
 param(
-    [switch]$SkipFrontend,
-    [switch]$SkipBrowser,
     [switch]$Silent
 )
 
@@ -81,11 +79,6 @@ $services = @(
 
 foreach ($service in $services) {
     Start-ServiceProcess -Definition $service
-}
-
-if (-not $SkipFrontend) {
-    $frontendDefinition = @{ Name = "AngularFrontend"; Path = "Frontend"; File = "npm.cmd"; Args = @("start"); ArgsNoBrowser = @("run", "start:no-open"); Port = 4200 }
-    Start-ServiceProcess -Definition $frontendDefinition
 }
 
 Start-Sleep -Seconds 3

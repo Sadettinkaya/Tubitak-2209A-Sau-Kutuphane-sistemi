@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -19,16 +19,30 @@ export class SignupComponent {
     password: '',
     academicLevel: 'Lisans'
   };
+  isLoading: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   onSignup() {
+    if (this.isLoading) return;
+
+    this.isLoading = true;
+    this.cdr.detectChanges();
+
     this.authService.register(this.user).subscribe({
       next: () => {
+        this.isLoading = false;
+        this.cdr.detectChanges();
         alert('Kayıt başarılı! Giriş yapabilirsiniz.');
         this.router.navigate(['/login']);
       },
       error: (err) => {
+        this.isLoading = false;
+        this.cdr.detectChanges();
         console.error(err);
         let errorMessage = 'Kayıt başarısız.\n';
         if (err.error && Array.isArray(err.error)) {
