@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\ApiGateway\\ApiGateway.csproj": {}
+    "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\ApiGateway\\ApiGateway.csproj": {}
   },
   "projects": {
-    "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\ApiGateway\\ApiGateway.csproj": {
+    "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\ApiGateway\\ApiGateway.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\ApiGateway\\ApiGateway.csproj",
+        "projectUniqueName": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\ApiGateway\\ApiGateway.csproj",
         "projectName": "ApiGateway",
-        "projectPath": "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\ApiGateway\\ApiGateway.csproj",
+        "projectPath": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\ApiGateway\\ApiGateway.csproj",
         "packagesPath": "C:\\Users\\uyslz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\ApiGateway\\obj\\",
+        "outputPath": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\ApiGateway\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

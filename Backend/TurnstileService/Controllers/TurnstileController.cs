@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TurnstileService.Models;
 using TurnstileService.Services;
+using Shared.Events;
 
 namespace TurnstileService.Controllers;
 
@@ -13,15 +14,18 @@ public class TurnstileController : ControllerBase
     private readonly ReservationAccessClient _reservationClient;
     private readonly ITurnstileEntryLog _entryLog;
     private readonly ILogger<TurnstileController> _logger;
+    private readonly RabbitMQPublisher _publisher;
 
     public TurnstileController(
         ReservationAccessClient reservationClient,
         ITurnstileEntryLog entryLog,
-        ILogger<TurnstileController> logger)
+        ILogger<TurnstileController> logger,
+        RabbitMQPublisher publisher)
     {
         _reservationClient = reservationClient;
         _entryLog = entryLog;
         _logger = logger;
+        _publisher = publisher;
     }
 
     [HttpPost("enter")]
@@ -47,6 +51,16 @@ public class TurnstileController : ControllerBase
 
             if (reservationResponse.Allowed)
             {
+                // Başarılı giriş event'i gönder
+                var entryEvent = new StudentEnteredEvent
+                {
+                    StudentNumber = request.StudentNumber,
+                    EntryTime = DateTime.UtcNow,
+                    TurnstileId = "turnstile-1"
+                };
+                _publisher.Publish(entryEvent, "student.entered");
+                _logger.LogInformation("Student {StudentNumber} entered via turnstile", request.StudentNumber);
+
                 return Ok(new { message = reservationResponse.Message, doorOpen = true });
             }
 

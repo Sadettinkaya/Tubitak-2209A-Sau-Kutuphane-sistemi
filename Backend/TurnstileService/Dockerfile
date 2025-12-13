@@ -5,9 +5,20 @@ EXPOSE 5003
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["TurnstileService.csproj", "."]
-RUN dotnet restore "TurnstileService.csproj"
-COPY . .
+
+# Copy Shared.Events project first
+COPY ["Shared.Events/Shared.Events.csproj", "Shared.Events/"]
+COPY ["TurnstileService/TurnstileService.csproj", "TurnstileService/"]
+
+# Restore both projects
+RUN dotnet restore "TurnstileService/TurnstileService.csproj"
+
+# Copy all source files
+COPY ["Shared.Events/", "Shared.Events/"]
+COPY ["TurnstileService/", "TurnstileService/"]
+
+# Build
+WORKDIR /src/TurnstileService
 RUN dotnet build "TurnstileService.csproj" -c Release -o /app/build
 
 FROM build AS publish

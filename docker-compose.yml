@@ -43,18 +43,23 @@ services:
   # Reservation Service (Port 5002)
   reservation-service:
     build:
-      context: ./Backend/ReservationService
-      dockerfile: Dockerfile
+      context: ./Backend
+      dockerfile: ReservationService/Dockerfile
     container_name: reservation_service
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5002
       - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=LibraryReservation;Username=postgres;Password=78
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Username=library
+      - RabbitMQ__Password=library123
       - TZ=Europe/Istanbul
     ports:
       - "5002:5002"
     depends_on:
       postgres:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     networks:
       - library_network
@@ -62,20 +67,24 @@ services:
   # Turnstile Service (Port 5003)
   turnstile-service:
     build:
-      context: ./Backend/TurnstileService
-      dockerfile: Dockerfile
+      context: ./Backend
+      dockerfile: TurnstileService/Dockerfile
     container_name: turnstile_service
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5003
       - Turnstile__ReservationServiceBaseUrl=http://api-gateway:5010/
       - Turnstile__IdentityBaseUrl=http://identity-service:5001/api/Auth
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Username=library
+      - RabbitMQ__Password=library123
       - TZ=Europe/Istanbul
     ports:
       - "5003:5003"
     depends_on:
       - reservation-service
       - identity-service
+      - rabbitmq
     networks:
       - library_network
 
@@ -114,6 +123,24 @@ services:
     networks:
       - library_network
 
+  # RabbitMQ Message Broker
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: library_rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=library
+      - RABBITMQ_DEFAULT_PASS=library123
+    ports:
+      - "5672:5672"   # AMQP port
+      - "15672:15672" # Management UI
+    networks:
+      - library_network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # Frontend (Port 4200)
   frontend:
     build:
@@ -126,6 +153,32 @@ services:
       - api-gateway
     networks:
       - library_network
+
+  # Database Initializer - runs after services start
+  db-init:
+    image: postgres:15-alpine
+    container_name: library_db_init
+    depends_on:
+      identity-service:
+        condition: service_started
+      reservation-service:
+        condition: service_started
+    networks:
+      - library_network
+    volumes:
+      - ./restore_identity.sql:/scripts/restore_identity.sql
+      - ./restore_data.sql:/scripts/restore_data.sql
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        echo "Waiting for migrations to complete..."
+        sleep 25
+        echo "Restoring identity data..."
+        PGPASSWORD=78 psql -h postgres -U postgres -d LibraryReservation -f /scripts/restore_identity.sql
+        echo "Restoring reservation data..."
+        PGPASSWORD=78 psql -h postgres -U postgres -d LibraryReservation -f /scripts/restore_data.sql
+        echo "Database initialization completed!"
+    restart: "no"
 
 volumes:
   postgres_data:

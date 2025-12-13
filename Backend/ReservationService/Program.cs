@@ -1,6 +1,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using ReservationService.Data;
+using ReservationService.Services;
+using Shared.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,22 @@ builder.Services.AddHttpClient("IdentityService", client =>
     client.BaseAddress = new Uri(baseAddress);
     client.Timeout = TimeSpan.FromSeconds(10);
 });
+
+// RabbitMQ Publisher - Event yayınlamak için
+builder.Services.AddSingleton(sp => 
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+    var rabbitHost = config["RabbitMQ:Host"] ?? "localhost";
+    var rabbitUser = config["RabbitMQ:Username"] ?? "guest";
+    var rabbitPass = config["RabbitMQ:Password"] ?? "guest";
+    return new RabbitMQPublisher(rabbitHost, rabbitUser, rabbitPass);
+});
+
+// RabbitMQ Event Consumer
+builder.Services.AddHostedService<StudentEntryEventConsumer>();
+
+// Otomatik ceza kontrolü servisi - Her 1 dakikada bir çalışır
+builder.Services.AddHostedService<PenaltyCheckService>();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>

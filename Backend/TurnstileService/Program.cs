@@ -1,12 +1,22 @@
 using Microsoft.Extensions.Options;
 using TurnstileService.Models;
 using TurnstileService.Services;
+using Shared.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<TurnstileOptions>(builder.Configuration.GetSection("Turnstile"));
 builder.Services.AddSingleton<ITurnstileEntryLog, InMemoryTurnstileEntryLog>();
 builder.Services.AddSingleton<TurnstileAuthProvider>();
+
+// RabbitMQ Publisher
+builder.Services.AddSingleton<RabbitMQPublisher>(sp =>
+{
+    var rabbitHost = builder.Configuration.GetValue<string>("RabbitMQ:Host") ?? "localhost";
+    var rabbitUser = builder.Configuration.GetValue<string>("RabbitMQ:Username") ?? "library";
+    var rabbitPass = builder.Configuration.GetValue<string>("RabbitMQ:Password") ?? "library123";
+    return new RabbitMQPublisher(rabbitHost, rabbitUser, rabbitPass);
+});
 
 builder.Services.AddHttpClient<ReservationAccessClient>((serviceProvider, client) =>
 {

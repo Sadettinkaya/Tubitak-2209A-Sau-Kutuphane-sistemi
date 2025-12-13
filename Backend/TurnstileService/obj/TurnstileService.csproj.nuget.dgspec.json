@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\TurnstileService\\TurnstileService.csproj": {}
+    "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\TurnstileService\\TurnstileService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\TurnstileService\\TurnstileService.csproj": {
+    "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\Shared.Events\\Shared.Events.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\TurnstileService\\TurnstileService.csproj",
-        "projectName": "TurnstileService",
-        "projectPath": "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\TurnstileService\\TurnstileService.csproj",
+        "projectUniqueName": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\Shared.Events\\Shared.Events.csproj",
+        "projectName": "Shared.Events",
+        "projectPath": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\Shared.Events\\Shared.Events.csproj",
         "packagesPath": "C:\\Users\\uyslz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\TurnstileService\\obj\\",
+        "outputPath": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\Shared.Events\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,6 +50,81 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.8.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\TurnstileService\\TurnstileService.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\TurnstileService\\TurnstileService.csproj",
+        "projectName": "TurnstileService",
+        "projectPath": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\TurnstileService\\TurnstileService.csproj",
+        "packagesPath": "C:\\Users\\uyslz\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\TurnstileService\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\uyslz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\Shared.Events\\Shared.Events.csproj": {
+                "projectPath": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\Shared.Events\\Shared.Events.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -59,6 +134,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[6.0.22, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.8.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

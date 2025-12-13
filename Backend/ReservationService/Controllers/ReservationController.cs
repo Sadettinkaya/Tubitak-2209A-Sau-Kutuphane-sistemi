@@ -5,6 +5,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReservationService.Data;
+using Shared.Events;
 
 namespace ReservationService.Controllers
 {
@@ -15,6 +16,7 @@ namespace ReservationService.Controllers
         private readonly ReservationDbContext _context;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<ReservationController> _logger;
+        private readonly RabbitMQPublisher _publisher;
 
         private const int EarlyToleranceMinutes = 5;  // Başlangıçtan 5dk önce giriş yapılabilir
         private const int EntryGracePeriodMinutes = 15; // Başlangıçtan 15dk sonrasına kadar giriş yapılabilir, sonra ceza
@@ -44,10 +46,11 @@ namespace ReservationService.Controllers
             ["admin"] = "Admin"
         };
 
-        public ReservationController(ReservationDbContext context, IHttpClientFactory httpClientFactory, ILogger<ReservationController> logger)
+        public ReservationController(ReservationDbContext context, IHttpClientFactory httpClientFactory, ILogger<ReservationController> logger, RabbitMQPublisher publisher)
         {
             _context = context;
             _httpClientFactory = httpClientFactory;
+            _publisher = publisher;
             _logger = logger;
         }
 
@@ -255,6 +258,28 @@ namespace ReservationService.Controllers
             _context.Reservations.Add(reservation);
             await _context.SaveChangesAsync();
 
+            // RabbitMQ Event: Rezervasyon oluşturuldu
+            try
+            {
+                var createdEvent = new ReservationCreatedEvent
+                {
+                    ReservationId = reservation.Id,
+                    StudentNumber = reservation.StudentNumber,
+                    TableId = reservation.TableId,
+                    ReservationDate = reservation.ReservationDate.ToString("yyyy-MM-dd"),
+                    StartTime = reservation.StartTime.ToString("HH:mm"),
+                    EndTime = reservation.EndTime.ToString("HH:mm"),
+                    StudentType = reservation.StudentType,
+                    CreatedAt = DateTime.UtcNow
+                };
+                _publisher.Publish(createdEvent, "reservation.created");
+                _logger.LogInformation("Reservation {ReservationId} created for student {StudentNumber}", reservation.Id, reservation.StudentNumber);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to publish ReservationCreated event for reservation {ReservationId}", reservation.Id);
+            }
+
             return Ok(new { message = "Rezervasyon oluşturuldu.", reservationId = reservation.Id });
         }
 
@@ -351,6 +376,25 @@ namespace ReservationService.Controllers
 
             _context.Reservations.Remove(reservation);
             await _context.SaveChangesAsync();
+
+            // RabbitMQ Event: Rezervasyon iptal edildi
+            try
+            {
+                var cancelledEvent = new ReservationCancelledEvent
+                {
+                    ReservationId = reservation.Id,
+                    StudentNumber = reservation.StudentNumber,
+                    TableId = reservation.TableId,
+                    ReservationDate = reservation.ReservationDate.ToString("yyyy-MM-dd"),
+                    CancelledAt = DateTime.UtcNow
+                };
+                _publisher.Publish(cancelledEvent, "reservation.cancelled");
+                _logger.LogInformation("Reservation {ReservationId} cancelled for student {StudentNumber}", reservation.Id, reservation.StudentNumber);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to publish ReservationCancelled event for reservation {ReservationId}", reservation.Id);
+            }
 
             return Ok(new { message = "Rezervasyon iptal edildi." });
         }

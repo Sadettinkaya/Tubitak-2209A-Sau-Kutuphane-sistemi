@@ -1,0 +1,13 @@
+C:\Users\uyslz\Desktop\Tubitak-2209A-Sau-Kutuphane-sistemi\Backend\Shared.Events\bin\Debug\net6.0\Shared.Events.deps.json
+C:\Users\uyslz\Desktop\Tubitak-2209A-Sau-Kutuphane-sistemi\Backend\Shared.Events\bin\Debug\net6.0\Shared.Events.dll
+C:\Users\uyslz\Desktop\Tubitak-2209A-Sau-Kutuphane-sistemi\Backend\Shared.Events\bin\Debug\net6.0\Shared.Events.pdb
+C:\Users\uyslz\Desktop\Tubitak-2209A-Sau-Kutuphane-sistemi\Backend\Shared.Events\obj\Debug\net6.0\Shared.Events.csproj.AssemblyReference.cache
+C:\Users\uyslz\Desktop\Tubitak-2209A-Sau-Kutuphane-sistemi\Backend\Shared.Events\obj\Debug\net6.0\Shared.Events.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\uyslz\Desktop\Tubitak-2209A-Sau-Kutuphane-sistemi\Backend\Shared.Events\obj\Debug\net6.0\Shared.Events.AssemblyInfoInputs.cache
+C:\Users\uyslz\Desktop\Tubitak-2209A-Sau-Kutuphane-sistemi\Backend\Shared.Events\obj\Debug\net6.0\Shared.Events.AssemblyInfo.cs
+C:\Users\uyslz\Desktop\Tubitak-2209A-Sau-Kutuphane-sistemi\Backend\Shared.Events\obj\Debug\net6.0\Shared.Events.csproj.CoreCompileInputs.cache
+C:\Users\uyslz\Desktop\Tubitak-2209A-Sau-Kutuphane-sistemi\Backend\Shared.Events\obj\Debug\net6.0\Shared.Events.sourcelink.json
+C:\Users\uyslz\Desktop\Tubitak-2209A-Sau-Kutuphane-sistemi\Backend\Shared.Events\obj\Debug\net6.0\Shared.Events.dll
+C:\Users\uyslz\Desktop\Tubitak-2209A-Sau-Kutuphane-sistemi\Backend\Shared.Events\obj\Debug\net6.0\refint\Shared.Events.dll
+C:\Users\uyslz\Desktop\Tubitak-2209A-Sau-Kutuphane-sistemi\Backend\Shared.Events\obj\Debug\net6.0\Shared.Events.pdb
+C:\Users\uyslz\Desktop\Tubitak-2209A-Sau-Kutuphane-sistemi\Backend\Shared.Events\obj\Debug\net6.0\ref\Shared.Events.dll

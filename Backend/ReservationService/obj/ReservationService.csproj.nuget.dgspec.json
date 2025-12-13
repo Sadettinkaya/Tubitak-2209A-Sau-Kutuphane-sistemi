@@ -1,17 +1,109 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\ReservationService\\ReservationService.csproj": {}
+    "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\ReservationService\\ReservationService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\ReservationService\\ReservationService.csproj": {
+    "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\ReservationService\\ReservationService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\ReservationService\\ReservationService.csproj",
+        "projectUniqueName": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\ReservationService\\ReservationService.csproj",
         "projectName": "ReservationService",
-        "projectPath": "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\ReservationService\\ReservationService.csproj",
+        "projectPath": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\ReservationService\\ReservationService.csproj",
         "packagesPath": "C:\\Users\\uyslz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\uyslz\\Desktop\\LibaryRezervation\\Backend\\ReservationService\\obj\\",
+        "outputPath": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\ReservationService\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\uyslz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\Shared.Events\\Shared.Events.csproj": {
+                "projectPath": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\Shared.Events\\Shared.Events.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.25, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[6.0.22, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.8.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\Shared.Events\\Shared.Events.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\Shared.Events\\Shared.Events.csproj",
+        "projectName": "Shared.Events",
+        "projectPath": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\Shared.Events\\Shared.Events.csproj",
+        "packagesPath": "C:\\Users\\uyslz\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\uyslz\\Desktop\\Tubitak-2209A-Sau-Kutuphane-sistemi\\Backend\\Shared.Events\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,19 +142,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "RabbitMQ.Client": {
               "target": "Package",
-              "version": "[6.0.25, )"
-            },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
-              "target": "Package",
-              "version": "[6.0.22, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.5.0, )"
+              "version": "[6.8.1, )"
             }
           },
           "imports": [
@@ -77,9 +159,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
